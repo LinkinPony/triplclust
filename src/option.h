@@ -67,23 +67,23 @@ class Opt {
   const char *get_ifname();
   // get outfile name
   const char *get_ofprefix();
-  bool needs_dnn();
-  bool is_gnuplot();
-  char get_delimiter();
-  size_t get_skip();
-  int get_verbosity();
-  double get_r();
-  size_t get_k();
-  size_t get_n();
-  double get_a();
-  double get_s();
-  bool is_tauto();
-  double get_t();
-  bool is_dmax();
-  double get_dmax();
-  bool get_ordered();   //!
+  bool needs_dnn() const;
+  bool is_gnuplot() const;
+  char get_delimiter() const;
+  size_t get_skip() const;
+  int get_verbosity() const;
+  double get_r() const;
+  size_t get_k() const;
+  size_t get_n() const;
+  double get_a() const;
+  double get_s() const;
+  bool is_tauto() const;
+  double get_t() const;
+  bool is_dmax() const;
+  double get_dmax() const;
+  bool get_ordered() const;   //!
   Linkage get_linkage();
-  size_t get_m();
+  size_t get_m() const;
 };
 
 #endif

@@ -247,20 +247,20 @@ void Opt::set_dnn(double dnn) {
 // read access functions
 const char* Opt::get_ifname() { return this->infile_name; }
 const char* Opt::get_ofprefix() { return this->outfile_prefix; }
-bool Opt::needs_dnn() { return this->rdnn || this->sdnn || this->dmax_dnn; }
-bool Opt::is_gnuplot() { return this->gnuplot; }
-size_t Opt::get_skip() { return this->skip; }
-char Opt::get_delimiter() { return this->delimiter; }
-int Opt::get_verbosity() { return this->verbose; }
-double Opt::get_r() { return this->r; }
-size_t Opt::get_k() { return this->k; }
-size_t Opt::get_n() { return this->n; }
-double Opt::get_a() { return this->a; }
-double Opt::get_s() { return this->s; }
-bool Opt::is_tauto() { return this->tauto; }
-double Opt::get_t() { return this->t; }
-bool Opt::is_dmax() { return this->isdmax; }
-double Opt::get_dmax() { return this->dmax; }
+bool Opt::needs_dnn() const { return this->rdnn || this->sdnn || this->dmax_dnn; }
+bool Opt::is_gnuplot() const { return this->gnuplot; }
+size_t Opt::get_skip() const { return this->skip; }
+char Opt::get_delimiter() const { return this->delimiter; }
+int Opt::get_verbosity() const { return this->verbose; }
+double Opt::get_r() const { return this->r; }
+size_t Opt::get_k() const { return this->k; }
+size_t Opt::get_n() const { return this->n; }
+double Opt::get_a() const { return this->a; }
+double Opt::get_s() const { return this->s; }
+bool Opt::is_tauto() const { return this->tauto; }
+double Opt::get_t() const { return this->t; }
+bool Opt::is_dmax() const { return this->isdmax; }
+double Opt::get_dmax() const { return this->dmax; }
 Linkage Opt::get_linkage() { return this->link; }
-size_t Opt::get_m() { return this->m; }
-bool Opt::get_ordered() {return this->ordered;}
+size_t Opt::get_m() const { return this->m; }
+bool Opt::get_ordered() const {return this->ordered;}

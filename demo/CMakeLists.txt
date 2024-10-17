@@ -1,0 +1,2 @@
+link_libraries(triplclust_open3d)
+add_executable(demo_open3d_wrapper open3d_wrapper.cpp)

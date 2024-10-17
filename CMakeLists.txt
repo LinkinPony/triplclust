@@ -25,3 +25,4 @@ set_target_properties(triplclust-demo PROPERTIES EXCLUDE_FROM_ALL TRUE COMPILE_F
 add_custom_target(demo DEPENDS triplclust-demo)
 
 add_subdirectory(src/open3d_wrapper)
+add_subdirectory(demo)

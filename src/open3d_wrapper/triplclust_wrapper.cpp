@@ -85,8 +85,10 @@ std::shared_ptr<ClusterPointCloud> TriplclustWrapper::Run(std::shared_ptr<open3d
   //TODO: pre allocate
   for (auto &point : cloud_xyz) {
     result->points_.emplace_back(point.x, point.y, point.z);
-
-    result->cluster_index_.emplace_back(point.index == -1 ? ClusterPointCloud::NOISE_INDEX : point.index);
+    result->cluster_index_.emplace_back();
+    for (auto id : point.cluster_ids) {
+      result->cluster_index_.back().emplace_back(id);
+    }
   }
 
   return result;

@@ -18,14 +18,14 @@ class ClusterPointCloud : public open3d::geometry::PointCloud {
 
  public:
   ClusterPointCloud() = default;
-  static const size_t NOISE_INDEX = std::numeric_limits<size_t>::max();
+   constexpr static size_t NOISE_INDEX = std::numeric_limits<size_t>::max();
 
  public:
   ClusterPointCloud &Clear() override;
   [[nodiscard]] bool IsEmpty() const override;
 
  public://members
-  std::vector<size_t> cluster_index_;
+  std::vector<std::vector<size_t> > cluster_index_;
 };
 
 class TriplclustWrapper {
