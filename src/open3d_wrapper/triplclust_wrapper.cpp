@@ -94,7 +94,7 @@ std::shared_ptr<ClusterPointCloud> TriplclustWrapper::Run(const std::shared_ptr<
   return result;
 }
 TriplclustWrapper::TriplclustPointCloud TriplclustWrapper::ConvertOpen3dPCDToTriplclust_(
-    std::shared_ptr<open3d::geometry::PointCloud> &point_cloud) {
+    const std::shared_ptr<open3d::geometry::PointCloud> &point_cloud) {
   TriplclustPointCloud result;
   for (auto &point : point_cloud->points_) {
     result.emplace_back(point.x(), point.y(), point.z());

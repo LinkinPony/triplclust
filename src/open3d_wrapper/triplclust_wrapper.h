@@ -38,7 +38,7 @@ class TriplclustWrapper {
   static std::shared_ptr<ClusterPointCloud> Run(const std::shared_ptr<open3d::geometry::PointCloud> &point_cloud, Opt &opt_params);
 
  private:
-  static TriplclustPointCloud ConvertOpen3dPCDToTriplclust_(std::shared_ptr<open3d::geometry::PointCloud> &point_cloud);
+  static TriplclustPointCloud ConvertOpen3dPCDToTriplclust_(const std::shared_ptr<open3d::geometry::PointCloud> &point_cloud);
 
 };
 
