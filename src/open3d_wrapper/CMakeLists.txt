@@ -14,4 +14,4 @@ target_link_libraries(${PROJECT_NAME}
     triplclust_lib
     Open3D::Open3D
 )
-target_include_directories(triplclust_open3d PUBLIC src)
+target_include_directories(triplclust_open3d PUBLIC ..)
