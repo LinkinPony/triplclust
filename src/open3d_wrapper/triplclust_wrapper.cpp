@@ -21,7 +21,7 @@ ClusterPointCloud &ClusterPointCloud::Clear() {
 bool ClusterPointCloud::IsEmpty() const {
   return PointCloud::IsEmpty() && cluster_index_.empty();
 }
-std::shared_ptr<ClusterPointCloud> TriplclustWrapper::Run(std::shared_ptr<open3d::geometry::PointCloud> &point_cloud,
+std::shared_ptr<ClusterPointCloud> TriplclustWrapper::Run(const std::shared_ptr<open3d::geometry::PointCloud> &point_cloud,
                                                           Opt &opt_params) {
   int opt_verbose = opt_params.get_verbosity();
   auto cloud_xyz = ConvertOpen3dPCDToTriplclust_(point_cloud);
