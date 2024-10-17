@@ -8,6 +8,7 @@
 
 //from triplclust
 #include <option.h>
+#include <pointcloud.h>
 
 #include <open3d/Open3D.h>
 
@@ -17,7 +18,7 @@ class ClusterPointCloud : public open3d::geometry::PointCloud {
 
  public:
   ClusterPointCloud() = default;
-  const size_t NOISE_INDEX = std::numeric_limits<size_t>::max();
+  static const size_t NOISE_INDEX = std::numeric_limits<size_t>::max();
 
  public:
   ClusterPointCloud &Clear() override;
@@ -29,9 +30,16 @@ class ClusterPointCloud : public open3d::geometry::PointCloud {
 
 class TriplclustWrapper {
 
+  using Option = Opt;
+  using TriplclustPointCloud = PointCloud;
+
  public:
   //TODO: refactor option
-  std::shared_ptr<ClusterPointCloud> Run(std::shared_ptr<open3d::geometry::PointCloud> &point_cloud, Opt &option);
+  static std::shared_ptr<ClusterPointCloud> Run(std::shared_ptr<open3d::geometry::PointCloud> &point_cloud, Opt &opt_params);
+
+ private:
+  static TriplclustPointCloud ConvertOpen3dPCDToTriplclust_(std::shared_ptr<open3d::geometry::PointCloud> &point_cloud);
+
 };
 
 } // triplclust

@@ -16,19 +16,12 @@ set(SRC src/cluster.cpp src/triplet.cpp src/main.cpp src/dnn.cpp src/hclust/fast
 
 # default target (created with "make")
 add_executable (triplclust ${SRC})
+add_library(triplclust_lib ${SRC})
+target_include_directories(triplclust_lib PUBLIC src)
 
 # webdemo target (created with "make demo")
 add_executable (triplclust-demo ${SRC})
 set_target_properties(triplclust-demo PROPERTIES EXCLUDE_FROM_ALL TRUE COMPILE_FLAGS "-DWEBDEMO")
 add_custom_target(demo DEPENDS triplclust-demo)
 
-#Open3D Wrapper
-
-find_package(Open3D REQUIRED)
-
-add_library(triplclust_open3d
-    ${SRC}
-    src/open3d_wrapper/triplclust_wrapper.cpp
-    src/open3d_wrapper/triplclust_wrapper.h
-)
-target_include_directories(triplclust_open3d PUBLIC src)
+add_subdirectory(src/open3d_wrapper)
