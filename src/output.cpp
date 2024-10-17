@@ -108,14 +108,14 @@ bool debug_gnuplot(const PointCloud &cloud, const PointCloud &cloud_smooth,
 
   of << "'-' with points lc 'black' title 'original', '-' with points lc "
         "'red' title 'smoothed'\n";
-  for (PointCloud::const_iterator it = cloud.begin(); it != cloud.end(); ++it) {
+  for (auto it = cloud.begin(); it != cloud.end(); ++it) {
     of << it->x << " " << it->y;
     if (!is2d) of << " " << it->z;
     of << std::endl;
   }
   of << "e\n";
 
-  for (PointCloud::const_iterator it = cloud_smooth.begin();
+  for (auto it = cloud_smooth.begin();
        it != cloud_smooth.end(); ++it) {
     of << it->x << " " << it->y;
     if (!is2d) of << " " << it->z;
@@ -141,7 +141,7 @@ bool cloud_to_csv(const PointCloud &cloud, const char *fname) {
     return false;
   }
   of << "# x,y,z" << std::endl;
-  for (PointCloud::const_iterator it = cloud.begin(); it != cloud.end(); ++it) {
+  for (auto it = cloud.begin(); it != cloud.end(); ++it) {
     of << it->x << "," << it->y;
     if (!is2d) of << "," << it->z << std::endl;
   }
@@ -156,7 +156,7 @@ bool cloud_to_csv(const PointCloud &cloud, const char *fname) {
 //-------------------------------------------------------------------
 void clusters_to_gnuplot(const PointCloud &cloud,
                          const std::vector<cluster_t> &clusters) {
-  std::vector<Point> points = cloud;
+  std::vector<Point> points = cloud.getPoints();
   std::ostringstream pointstream, header, noise, clstream;
   std::string noiseheader = "";
   bool is2d = cloud.is2d();
@@ -268,7 +268,7 @@ void clusters_to_csv(const PointCloud &cloud) {
   std::cout << std::fixed
             << "# Comment: curveID -1 represents noise\n# x, y, z, curveID\n";
 
-  for (PointCloud::const_iterator it = cloud.begin(); it != cloud.end(); ++it) {
+  for (auto it = cloud.begin(); it != cloud.end(); ++it) {
     std::cout << it->x << "," << it->y << ",";
     if (!is2d) std::cout << it->z << ",";
     if (it->cluster_ids.empty()) {

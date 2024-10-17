@@ -128,7 +128,6 @@ Point operator*(double c, Point x) {
   return v;
 }
 
-PointCloud::PointCloud() { this->points2d = false; }
 
 void PointCloud::set2d(bool is2d) { this->points2d = is2d; }
 

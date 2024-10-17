@@ -57,17 +57,79 @@ Point operator*(Point x, double c);
 Point operator*(double c, Point x);
 
 // The Pointcloud is a vector of points
-class PointCloud : public std::vector<Point> {
+class PointCloud {
  private:
   bool points2d;
   bool ordered;   //!
+  std::vector<Point> points_;
 
  public:
   bool is2d() const;
   void set2d(bool is2d);
   bool isOrdered() const;   //!
   void setOrdered(bool isOrdered);  //!
-  PointCloud();
+  [[nodiscard]] const std::vector<Point> &getPoints() const { return points_; }
+
+  //TODO: test
+ public:
+  PointCloud() : points2d(false), ordered(false) {}
+  PointCloud(bool is2d, bool isOrdered) : points2d(is2d), ordered(isOrdered) {}
+  PointCloud(PointCloud &&other) noexcept
+      : points2d(other.points2d),
+        ordered(other.ordered),
+        points_(std::move(other.points_)) {}
+
+  PointCloud &operator=(PointCloud &&other) noexcept {
+    if (this != &other) {
+      points2d = other.points2d;
+      ordered = other.ordered;
+      points_ = std::move(other.points_);
+    }
+    return *this;
+  }
+  PointCloud(const PointCloud &) = default;
+  PointCloud &operator=(const PointCloud &) = default;
+ public:
+  using iterator = std::vector<Point>::iterator;
+  std::vector<Point>::iterator begin() { return points_.begin(); }
+  [[nodiscard]] std::vector<Point>::const_iterator begin() const { return points_.begin(); }
+  std::vector<Point>::iterator end() { return points_.end(); }
+  [[nodiscard]] std::vector<Point>::const_iterator end() const { return points_.end(); }
+
+  [[nodiscard]] std::vector<Point>::const_iterator cbegin() const { return points_.cbegin(); }
+  [[nodiscard]] std::vector<Point>::const_iterator cend() const { return points_.cend(); }
+
+  std::vector<Point>::reverse_iterator rbegin() { return points_.rbegin(); }
+  [[nodiscard]] std::vector<Point>::const_reverse_iterator rbegin() const { return points_.rbegin(); }
+  std::vector<Point>::reverse_iterator rend() { return points_.rend(); }
+  [[nodiscard]] std::vector<Point>::const_reverse_iterator rend() const { return points_.rend(); }
+
+  size_t size() const { return points_.size(); }
+  bool empty() const { return points_.empty(); }
+  size_t capacity() const { return points_.capacity(); }
+  void reserve(size_t n) { points_.reserve(n); }
+  void shrink_to_fit() { points_.shrink_to_fit(); }
+  void push_back(const Point &p) { points_.push_back(p); }
+  void push_back(Point &&p) { points_.push_back(std::move(p)); }
+  template<typename... Args>
+  void emplace_back(Args &&... args) { points_.emplace_back(std::forward<Args>(args)...); }
+
+  void pop_back() { points_.pop_back(); }
+  void clear() { points_.clear(); }
+
+  iterator insert(iterator pos, const Point &value) { return points_.insert(pos, value); }
+  iterator insert(iterator pos, Point &&value) { return points_.insert(pos, std::move(value)); }
+  template<typename InputIt>
+  void insert(iterator pos, InputIt first, InputIt last) { points_.insert(pos, first, last); }
+
+  iterator erase(iterator pos) { return points_.erase(pos); }
+  iterator erase(iterator first, iterator last) { return points_.erase(first, last); }
+
+  void resize(size_t count) { points_.resize(count); }
+  void resize(size_t count, const Point &value) { points_.resize(count, value); }
+
+  Point &operator[](size_t index) { return points_[index]; }
+  const Point &operator[](size_t index) const { return points_[index]; }
 };
 
 
