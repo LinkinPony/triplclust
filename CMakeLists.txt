@@ -4,7 +4,7 @@ project(triplclust)
 
 set (CMAKE_CXX_FLAGS "-O2")
 
-# with MS Visual C++ we must explicity switch on proper exception handling
+# with MS Visual C++ we must explicitly switch on proper exception handling
 if (MSVC)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
 endif (MSVC)
@@ -21,3 +21,14 @@ add_executable (triplclust ${SRC})
 add_executable (triplclust-demo ${SRC})
 set_target_properties(triplclust-demo PROPERTIES EXCLUDE_FROM_ALL TRUE COMPILE_FLAGS "-DWEBDEMO")
 add_custom_target(demo DEPENDS triplclust-demo)
+
+#Open3D Wrapper
+
+find_package(Open3D REQUIRED)
+
+add_library(triplclust_open3d
+    ${SRC}
+    src/open3d_wrapper/triplclust_wrapper.cpp
+    src/open3d_wrapper/triplclust_wrapper.h
+)
+target_include_directories(triplclust_open3d PUBLIC src)
